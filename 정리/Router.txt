@@ -1,0 +1,26 @@
+하나의 path함수만으로
+ListView, DetailView의 CRUD를 모두 처리할 수 없음
+
+여러개의 path 함수가 하는 역할을 하나로 묶어주는 과정 필요
+path(요청을 처리할 url, 요청을 인자로 받아 처리할 함수, namespace)
+두 번째로 인자로 올 함수를 묶어줘야 한다!
+list(), create(), retrieve() 등등
+
+path()를 묶어주는 .as_view()
+as_view는 dictionary 형식의 인자를 받을 수 있다.
+as_view({'http_method' : '처리할 함수'})
+
+ex)
+mypath = CommentViewSet.as_view({
+	'get' : 'retrieve',
+	'post' : 'update',
+	'patch' : 'partial_update',
+	'delete' : 'destroy'
+})
+urlpatterns = [
+     path('', mypath)
+]
+
+이처럼 관례적인 것을(?) 간단하게 처리하기 위해
+Router의 DefaultRouter를 이용한다.
+

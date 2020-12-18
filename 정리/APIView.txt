@@ -1,0 +1,14 @@
+APIView를 상속하여 View를 설계할 땐
+
+status와 Response를 import해와서 직접 응답과정을 만든다.
+
+https://www.django-rest-framework.org/tutorial/3-class-based-views/ (참고)
+
+APIView를 상속하여 CBV를 작성할때 내부 구성의 메소드 이름을
+내가 필요한 메소드 이름으로 정의한다.
+
+class 000(APIView):
+       def <내가 필요로 하는 HTTP Method>:
+	* APIView를 상속받아 CBV를 만드는 의의
+	그 Http Method로 어떻게 처리할지(어떤식으로 동작하는지) 직접 정의
+	그래서 status 와 Response를 import해와서 직접 정의!

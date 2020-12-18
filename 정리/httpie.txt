@@ -1,0 +1,10 @@
+httpie
+-> Command Line으로 동작하는 Http Client
+
+설치 : pip install --upgrade httpie
+
+Httpie 명령어
+http [flags](ex:--json, --form) [method](ex: GET, PUT, DELETE 등) URL [Item[Item]](ex. POST,PUT 방식 요청 : =로 표현, GET 방식 요청: ==로 표현)
+
+
+      

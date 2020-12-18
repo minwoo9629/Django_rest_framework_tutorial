@@ -1,0 +1,5 @@
+API 서버의 pagination의 의의
+
+하나의 request만으로 처리하기 어려운 레코드들을
+
+여러 request로 나누어 전송하기

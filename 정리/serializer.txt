@@ -1,0 +1,57 @@
+restframework를 사용하기위한 명령어
+pip install djangorestframework
+
+app을 생성해준 이후에 setting.py의 INSTALLED APPS에
+'rest_framework', 등록
+
+생성한 app 폴더에
+json을 직렬화 할 수 있는 코드들을 담을 serializer.py 를 만들어준다.
+
+serializer.py에
+from .models import Post ---> 모델을 직렬화하기위해 직렬화 할 모델을 불러온다.
+from rest_framework import serializers
+
+model Form을 작성하는 것과 유사하게 작성된다.
+
+ex) class PostSerializer(serializers.ModelSerializer):
+    	class Meta:
+        	model = Post
+        	# fields = '__all__'
+        	fields = ['title','body']
+
+생성한 app의
+views.py에 추가 해야 할 것들
+from rest_framework import viewsets // 
+from .models import Post
+from .serializer import PostSerializer
+
+# rest_framework는 CBV 기반
+
+ViewSet
+View(CRUD)를 설계하는 쉽고 간단한 방법
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+생성한 app의
+urls.py 구조
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
+
+router = DefaultRouter()
+router.register('post',views.PostViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
+
+# django rest framework --> router 을통해서 url을 결정한다.
+
+상세 페이지에 접속 후 OPTIONS를 확인해보면 자세한 내용을 보여준다.
+type이나 read_only 등
+여기서 read_only로 바꿔주고 싶다면
+serializers.py 에서 Meta class 아래에 read_only_fields = ('title',) --> 튜플로 작성
+
